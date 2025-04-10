@@ -31,14 +31,7 @@ class AuthMiddleware {
      // Get token from Authorization header
      const authHeader = req.header(JWT_CONFIG.TOKEN_HEADER);
      const token = authHeader?.startsWith( JWT_CONFIG.TOKEN_PREFIX+' ') ? authHeader.substring(7) : null;
-      // If no token is provided
-      // if (!token) {
-      //   res.status(httpStatus.UNAUTHORIZED).json({ 
-      //     success: false, 
-      //     message: 'Access denied. No token provided.'
-      //   });
-      //   return;
-      // }
+    
 
       const decoded = await TokenService.getInstance().verifyToken(token?.toString() as string);
      
