@@ -6,6 +6,7 @@ import httpStatus from "http-status";
 import UserService from "../../services/user.service";
 import { UserAttributes } from "../../types/user";
 import CheckUnique from "../../validators/checkUnique";
+import EmptyBodyValidator from "../../validators/emptyBody.validator";
 class ProfileController extends Controller {
     
     private userService: UserService;
@@ -17,8 +18,9 @@ class ProfileController extends Controller {
     }
 
     private initializeRoutes() {
-        this.router.get("/", AuthMiddleware.getInstance().handle, AsyncHandler.handle(this.getProfile.bind(this)));
-        this.router.put("/", AuthMiddleware.getInstance().handle, AsyncHandler.handle(this.updateProfile.bind(this)));
+        const validateRequestBody = new EmptyBodyValidator().validate(['name', 'email']);
+        this.router.get("/", AsyncHandler.handle(AuthMiddleware.getInstance().handle), AsyncHandler.handle(this.getProfile.bind(this)));
+        this.router.put("/",  AsyncHandler.handle(AuthMiddleware.getInstance().handle), AsyncHandler.handle(this.updateProfile.bind(this)));
     }
 
     private async getProfile(req: AuthRequest, res: Response) {

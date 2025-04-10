@@ -128,18 +128,18 @@ class TokenService {
         } catch (error) {
             // Handle specific JWT errors
             if (error instanceof jwt.TokenExpiredError ) {
-                const customError = new Error('jwt expired');
+                const customError = new Error('Token expired');
                 (customError as any).statusCode = httpStatus.UNAUTHORIZED;
                 console.log((customError as any).statusCode );
                 
                 throw customError;
             } else if (error instanceof jwt.JsonWebTokenError) {
-                const customError = new Error('jwt error');
+                const customError = new Error('Invalid token');
                 (customError as any).statusCode = httpStatus.UNAUTHORIZED;
                 
                 throw customError;
             } else {
-                const customError = new Error('jwt error');
+                const customError = new Error('Token verification failed');
                 (customError as any).statusCode = httpStatus.INTERNAL_SERVER_ERROR;
                 
                 throw customError;
