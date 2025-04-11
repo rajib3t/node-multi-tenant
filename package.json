@@ -11,7 +11,10 @@
     "migrate:undo": "npx sequelize-cli db:migrate:undo",
     "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all",
     "seed:create": "npx sequelize-cli seed:generate --name",
-    "seed:all": "npx sequelize-cli db:seed:all"
+    "seed:all": "npx sequelize-cli db:seed:all",
+    "migrate:tenants": "ts-node src/scripts/migrate-tenants.ts",
+    "migrate:tenant": "ts-node src/scripts/migrate-single-tenant.ts",
+    "migrate:tenants:undo": "ts-node src/scripts/undo-tenant-migrations.ts"
   },
   "author": "Rajib Mondal",
   "license": "ISC",
